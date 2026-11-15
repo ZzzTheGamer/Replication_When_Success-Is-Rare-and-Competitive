@@ -1,22 +1,22 @@
-# Formula 1：成功与失败经验的复现及扩展
+# Formula 1: Replication and Extension of Success and Failure Experience
 
-本项目使用 R 独立重建 Lapré and Cravey（2022）的累计经验变量，复现 Table 1 及 Table 2 的模型（1）、（2）、（4），并将模型（4）扩展至 1950–2025 和 2018–2025 两个样本。已发表结果与 R 估计并列展示。变量定义、构造依据及模型公式见 `CODEBOOK.md`。
+This project uses R to independently reconstruct the cumulative experience variables in Lapré and Cravey (2022), replicate Table 1 and models (1), (2), and (4) of Table 2, and extend model (4) to the 1950–2025 and 2018–2025 samples. Published results and R estimates are shown side by side. Variable definitions, construction decisions, and model formulas are documented in `CODEBOOK.md`.
 
-## 运行环境与数据
+## Environment and data
 
-分析已在 R 4.4.3 下验证。依赖包由 `setup.R` 安装，软件包版本记录在 `results/sessionInfo.txt`。全部数据处理、估计、表格和图形均由 R 完成。
+The analysis has been verified in R 4.4.3. Dependencies are installed by `setup.R`, and package versions are recorded in `results/sessionInfo.txt`. All data processing, estimation, tables, and figures are produced in R.
 
-作者原始数据需从原始复现材料取得，并将以下三个文件放入 `data/raw/authors/`：
+Obtain the authors' original data from their replication materials and place the following three files in `data/raw/authors/`:
 
-- `F1DataMainVariables.xlsx`：逐场事件标记、比赛信息和车手资料。
-- `F1StataData.dta`：用于核验独立重建的变量。
-- `F1VariableDictionary.xlsx`：作者变量字典。
+- `F1DataMainVariables.xlsx`: race-level event flags, race information, and driver information.
+- `F1StataData.dta`: used to validate the independently reconstructed variables.
+- `F1VariableDictionary.xlsx`: the authors' variable dictionary.
 
-原始数据位于其他目录时，可通过环境变量 `F1_AUTHOR_DIR` 指定目录。公开来源的 API JSON 和比赛报告 HTML 缓存已包含在项目中，支持离线复现。
+If the original data are stored elsewhere, set the directory through the `F1_AUTHOR_DIR` environment variable. Cached API JSON files and race-report HTML files from public sources are included for offline replication.
 
-## 完整复现
+## Full replication
 
-在 RStudio 打开 `f1_replication.Rproj`，执行：
+Open `f1_replication.Rproj` in RStudio and run:
 
 ```r
 source("setup.R")
@@ -24,16 +24,16 @@ Sys.setenv(F1_OFFLINE = "1")
 source("run_submission.R")
 ```
 
-命令行运行：
+From the command line:
 
 ```sh
 Rscript setup.R
 F1_OFFLINE=1 Rscript run_submission.R
 ```
 
-`setup.R` 首次安装依赖时需要联网；完整分析使用缓存时不需要联网。`run_submission.R` 按顺序执行数据重建、历史核验、扩展样本构造、模型估计及结果输出。人工编码表修改后，使用同一入口重新运行，以更新受影响的后续累计经验和估计。
+`setup.R` requires an internet connection when dependencies are first installed. The full analysis can run offline using the cache. `run_submission.R` runs data reconstruction, historical validation, extension sample construction, model estimation, and result generation in order. After changing a manual coding table, rerun the same entry script to update subsequent cumulative experience and estimates affected by the change.
 
-## 文件结构
+## File structure
 
 ```text
 f1_replication/
@@ -72,45 +72,45 @@ f1_replication/
     └── sessionInfo.txt
 ```
 
-`data/raw/authors/` 由原始复现材料提供；`data/processed/` 和 `results/models/` 在运行时生成。
+`data/raw/authors/` contains files obtained from the original replication materials. `data/processed/` and `results/models/` are generated during execution.
 
-| 脚本 | 功能 |
+| Script | Function |
 |---|---|
-| `00_config.R` | 检查依赖、配置路径及缓存选项。 |
-| `01_rebuild_original.R` | 从 Excel 事件标记重建累计经验，与 Stata 数据逐项核对。 |
-| `02_download_jolpica.R` | 读取或下载赛程及逐场结果。 |
-| `03_download_wikipedia.R` | 读取或下载比赛报告，提取补充比赛信息。 |
-| `04_models.R` | 估计历史样本的模型（1）、（2）、（4）。 |
-| `05_link_and_validate_status.R` | 连接历史身份与比赛结果，评估 status 分类与作者编码的一致率。 |
-| `06_build_extension.R` | 应用人工编码，构造扩展样本并延续历史累计经验。 |
-| `07_extension_models.R` | 估计扩展模型（4）、时期差异检验及敏感性分析。 |
-| `08_tables_and_figures.R` | 输出数值表、核验结果、图形、软件版本及输入哈希。 |
-| `10_paper_style_tables.R` | 重新估计五个模型并生成与原文布局对应的比较表。 |
-| `functions.R` | 数据构造、读取、核验及通用输出函数。 |
-| `model_helpers.R` | 模型估计、聚类标准误及随机截距核验。 |
-| `paper_style_helpers.R` | 比较表的 PDF、HTML、PNG 和 CSV 排版输出。 |
+| `00_config.R` | Checks dependencies and configures paths and cache options. |
+| `01_rebuild_original.R` | Reconstructs cumulative experience from the Excel event flags and checks each variable against the Stata data. |
+| `02_download_jolpica.R` | Reads or downloads schedules and race results. |
+| `03_download_wikipedia.R` | Reads or downloads race reports and extracts supplementary race information. |
+| `04_models.R` | Estimates models (1), (2), and (4) on the historical sample. |
+| `05_link_and_validate_status.R` | Links historical driver identities and race results, and measures agreement between status classifications and the authors' coding. |
+| `06_build_extension.R` | Applies manual coding, constructs the extension sample, and carries forward cumulative experience. |
+| `07_extension_models.R` | Estimates the extended model (4), tests differences across periods, and runs sensitivity analyses. |
+| `08_tables_and_figures.R` | Exports numerical tables, validation results, figures, software versions, and input hashes. |
+| `10_paper_style_tables.R` | Re-estimates the five models and generates comparison tables following the published layout. |
+| `functions.R` | Functions for data construction, reading, validation, and general output. |
+| `model_helpers.R` | Model estimation, clustered standard errors, and random-intercept checks. |
+| `paper_style_helpers.R` | Formats and exports comparison tables as PDF, HTML, PNG, and CSV. |
 
-## 人工输入
+## Manual inputs
 
-| 文件（`data/manual/`） | 内容 |
+| File (`data/manual/`) | Contents |
 |---|---|
-| `status_mapping.csv` | API status 到完赛、车辆失败、驾驶失败及非出发等类别的对应规则。 |
-| `dnf_overrides.csv` | 原因未明确的退赛记录、补充分类和来源。 |
-| `dsq_sensitivity.csv` | 取消资格事件的原因审阅与敏感性分类。 |
-| `race_coding.csv` | 天气、赛道类别、证据及来源。 |
-| `original_team_dummies.csv` | 原文 20 个车队指示变量的名称与适用年份。 |
-| `modern_team_mapping.csv` | 新时期车队身份及其与原文指示变量的对应。 |
-| `published_table1.csv` | 原文 Table 1 的统计量与显示精度。 |
-| `published_table2.csv` | 原文模型（1）、（2）、（4）的系数及标准误基准。 |
+| `status_mapping.csv` | Rules mapping API statuses to completion, car failure, driver failure, non-starts, and other categories. |
+| `dnf_overrides.csv` | Retirement records with unspecified reasons, supplementary classifications, and sources. |
+| `dsq_sensitivity.csv` | Review of disqualification reasons and classifications used in sensitivity analysis. |
+| `race_coding.csv` | Weather, track categories, evidence, and sources. |
+| `original_team_dummies.csv` | Names and applicable years for the 20 team indicators in the original paper. |
+| `modern_team_mapping.csv` | Team identities in the extension period and their correspondence to the original indicators. |
+| `published_table1.csv` | Published Table 1 statistics and display precision. |
+| `published_table2.csv` | Published coefficient and standard-error benchmarks for models (1), (2), and (4). |
 
-## 结果文件
+## Results
 
-- `results/paper_style/paper_style_comparison_tables.pdf`：Table 1、Table 2 及模型（4）扩展比较表；同目录 `index.html` 为 HTML 版。
-- `results/paper_style/refitted_coefficients.csv`：五个模型的完整系数、聚类标准误、检验及置信区间。
-- `results/paper_style/refitted_model_metadata.csv`：模型公式、样本数、比赛数及拟合统计量。
-- `results/figures/figure1_failure_rates.png`：1950–2025 年车辆失败与驾驶失败比例。
-- `results/figures/figure2_car_failure_coefficients.png`：三个时期样本的车辆失败经验系数及 95% 置信区间。
-- `results/tables/`：失败率、系数差异检验、敏感性估计及发表值比较。
-- `results/checks/`：累计变量、控制变量、分类一致率、样本覆盖和估计核验。
+- `results/paper_style/paper_style_comparison_tables.pdf`: Table 1, Table 2, and the model (4) extension comparison. The HTML version is `index.html` in the same directory.
+- `results/paper_style/refitted_coefficients.csv`: complete coefficients, clustered standard errors, tests, and confidence intervals for the five models.
+- `results/paper_style/refitted_model_metadata.csv`: model formulas, sample sizes, race counts, and fit statistics.
+- `results/figures/figure1_failure_rates.png`: annual car-failure and driver-failure rates, 1950–2025.
+- `results/figures/figure2_car_failure_coefficients.png`: car-failure experience coefficients and 95% confidence intervals for the three estimation samples.
+- `results/tables/`: failure rates, coefficient-difference tests, sensitivity estimates, and comparisons with published values.
+- `results/checks/`: validation of cumulative variables, controls, classification agreement, sample coverage, and estimation.
 
-`results/checks/input_sha256_manifest.csv` 记录人工输入、API 缓存及作者关键文件的 SHA-256，以识别分析所用的数据快照。
+`results/checks/input_sha256_manifest.csv` records SHA-256 hashes for the manual inputs, API cache, and key author files to identify the data snapshot used in the analysis.
