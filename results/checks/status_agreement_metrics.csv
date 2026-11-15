@@ -1,0 +1,11 @@
+metric,value
+original_model_rows,21487
+linked_rows,21481
+linked_percent,99.9720761390608
+informative_rows,21230
+agreement_all_linked_percent,96.6202690749965
+agreement_informative_percent,97.7626000942063
+author_dnf_linked,8981
+author_dnf_informative,8896
+agreement_author_dnf_all_linked_percent,94.2211335040641
+agreement_author_dnf_informative_percent,95.1214028776979

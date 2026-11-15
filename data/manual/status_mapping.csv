@@ -1,0 +1,137 @@
+status_api,category,rule_note
++1 Lap,none,"Finished the race, possibly laps behind; no DNF exposure."
++10 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++11 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++12 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++13 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++14 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++15 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++16 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++17 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++18 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++19 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++2 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++20 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++21 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++22 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++23 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++24 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++25 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++26 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++29 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++3 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++30 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++4 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++42 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++44 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++46 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++5 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++6 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++7 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++8 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
++9 Laps,none,"Finished the race, possibly laps behind; no DNF exposure."
+Accident,driver,"Accident/collision, sporting exclusion or physical driver issue; status-based category does not establish fault."
+Alternator,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Axle,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Battery,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Brake duct,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Brakes,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Broken wing,car,Damaged component without an explicit collision status: car in primary rule; root cause may be a collision.
+Chassis,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Clutch,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Collision,driver,"Accident/collision, sporting exclusion or physical driver issue; status-based category does not establish fault."
+Collision damage,driver,"Accident/collision, sporting exclusion or physical driver issue; status-based category does not establish fault."
+Cooling system,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Crankshaft,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+CV joint,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Damage,car,Damaged component without an explicit collision status: car in primary rule; root cause may be a collision.
+Debris,car,Damaged component without an explicit collision status: car in primary rule; root cause may be a collision.
+Did not start,nonstarter,No race start: excluded from the driver-race sample and cumulative exposure.
+Differential,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Disqualified,driver,Status alone does not distinguish technical from sporting disqualification; primary rule assigns driver. Flag this ambiguity and test technical-DSQ recoding separately.
+Distributor,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Driver Seat,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Driver unwell,driver,"Accident/collision, sporting exclusion or physical driver issue; status-based category does not establish fault."
+Driveshaft,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Drivetrain,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Electrical,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Electronics,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Engine,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Engine fire,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Engine misfire,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+ERS,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Excluded,driver,Status alone does not distinguish technical from sporting disqualification; primary rule assigns driver. Flag this ambiguity and test technical-DSQ recoding separately.
+Exhaust,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Eye injury,driver,"Accident/collision, sporting exclusion or physical driver issue; status-based category does not establish fault."
+Fatal accident,driver,"Accident/collision, sporting exclusion or physical driver issue; status-based category does not establish fault."
+Finished,none,"Finished the race, possibly laps behind; no DNF exposure."
+Fire,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Front wing,car,Damaged component without an explicit collision status: car in primary rule; root cause may be a collision.
+Fuel,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Fuel leak,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Fuel pipe,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Fuel pressure,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Fuel pump,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Fuel rig,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Fuel system,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Gearbox,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Halfshaft,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Handling,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Heat shield fire,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Hydraulics,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Ignition,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Illness,driver,"Accident/collision, sporting exclusion or physical driver issue; status-based category does not establish fault."
+Injection,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Injured,driver,"Accident/collision, sporting exclusion or physical driver issue; status-based category does not establish fault."
+Injury,driver,"Accident/collision, sporting exclusion or physical driver issue; status-based category does not establish fault."
+Lapped,none,"Finished the race, possibly laps behind; no DNF exposure."
+Launch control,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Magneto,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Mechanical,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Not classified,unknown,Status does not identify a car-versus-driver root cause; do not default to car.
+Not restarted,unknown,Status does not identify a car-versus-driver root cause; do not default to car.
+Oil leak,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Oil line,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Oil pipe,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Oil pressure,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Oil pump,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Out of fuel,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Overheating,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Physical,driver,"Accident/collision, sporting exclusion or physical driver issue; status-based category does not establish fault."
+Pneumatics,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Power loss,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Power Unit,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Puncture,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Radiator,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Rear wing,car,Damaged component without an explicit collision status: car in primary rule; root cause may be a collision.
+Refuelling,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Retired,unknown,Status does not identify a car-versus-driver root cause; do not default to car.
+Safety,unknown,Status does not identify a car-versus-driver root cause; do not default to car.
+Safety belt,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Safety concerns,unknown,Status does not identify a car-versus-driver root cause; do not default to car.
+Seat,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Spark plugs,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Spun off,driver,"Accident/collision, sporting exclusion or physical driver issue; status-based category does not establish fault."
+Stalled,driver,"Accident/collision, sporting exclusion or physical driver issue; status-based category does not establish fault."
+Steering,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Supercharger,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Suspension,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Technical,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Throttle,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Track rod,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Transmission,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Turbo,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Tyre,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Tyre puncture,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Undertray,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Underweight,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Vibrations,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Water leak,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Water pipe,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Water pressure,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Water pump,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Wheel,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Wheel bearing,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Wheel nut,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Wheel rim,car,Explicit mechanical/component/fuel failure; operational car-failure category.
+Withdrew,withdrawal,"If zero laps, nonstarter; otherwise driver withdrawal. New-period Wikipedia DNS overrides pre-start cases."

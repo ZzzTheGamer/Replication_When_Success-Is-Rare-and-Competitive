@@ -1,0 +1,7 @@
+.Rhistory
+.RData
+.Rproj.user/
+data/raw/authors/
+data/processed/
+results/models/
+*.zip

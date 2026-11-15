@@ -1,0 +1,17 @@
+variable,label,published_mean,published_sd,published_min,published_max,digits
+win,Win,0.0448,0.2069,0,1,4
+pod,Podium,0.1342,0.3406,0,1,4
+crace,Cumulative races,59.85,59.86,0,321,2
+cw,Cumulative own wins,3.81,9.72,0,91,2
+ctw,Cumulative teammate wins,3.27,6.73,0,55,2
+cfc,Cumulative car DNF,16.69,17.03,0,113,2
+cfd,Cumulative driver DNF,7.26,7.52,0,39,2
+ctfc,Cumulative teammate car DNF,15.69,16.29,0,92,2
+ctfd,Cumulative teammate driver DNF,7.30,8.27,0,45,2
+start,Grid position,11.96,6.84,1,34,2
+age,Age,30.13,5.14,17.46,55.80,2
+home,Home edge,0.0828,0.2756,0,1,4
+rcwet,Wet weather,0.1575,0.3643,0,1,4
+rcperm,Permanent track,0.7301,0.4439,0,1,4
+rcocc,Occasional track,0.1534,0.3604,0,1,4
+rcstarters,Number of starters,22.83,3.03,6,34,2

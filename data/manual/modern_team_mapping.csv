@@ -1,0 +1,17 @@
+constructor_api,lineage,legacy_dummy,rule
+ferrari,Ferrari,t5dfer,Continue the author's Ferrari indicator
+mclaren,McLaren,t5dmcl,Continue the author's McLaren indicator
+mercedes,Mercedes modern,t5dme2,Continue modern Mercedes; keep distinct from 1954-1955
+red_bull,Red Bull,t5dred,Continue the author's Red Bull indicator
+williams,Williams,t5dwil,Continue the author's Williams indicator
+renault,Renault-Alpine,,2016 revival and Alpine stay in the author's residual team category
+alpine,Renault-Alpine,,Same sporting team lineage as Renault 2016 onward; no retroactive reassignment to Renault 2002-2011
+force_india,Force India-Racing Point-Aston Martin,,Same broad lineage; teammates are always defined within the current race and constructor
+racing_point,Force India-Racing Point-Aston Martin,,Same broad lineage; retain original residual-team baseline
+aston_martin,Force India-Racing Point-Aston Martin,,Same broad lineage; retain original residual-team baseline
+toro_rosso,Toro Rosso-AlphaTauri-RB,,Same lineage and residual-team baseline
+alphatauri,Toro Rosso-AlphaTauri-RB,,Same lineage and residual-team baseline
+rb,Toro Rosso-AlphaTauri-RB,,Same lineage and residual-team baseline
+sauber,Sauber-Alfa Romeo,,Residual category; not the author's 1950-1951 Alfa Romeo
+alfa,Sauber-Alfa Romeo,,Rebranding of Sauber; not the author's 1950-1951 Alfa Romeo
+haas,Haas,,Residual team category

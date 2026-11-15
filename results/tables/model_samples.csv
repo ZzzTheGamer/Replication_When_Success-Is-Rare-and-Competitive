@@ -1,0 +1,4 @@
+model,n,races,wins,log_likelihood,wald_chi2,wald_df,omitted_constant_terms
+original_M4,21487,965,963,-2394.2132556022,915.822518095185,34,""
+full_1950_2025_M4,24928,1138,1136,-2773.54327600966,1060.89671498253,34,""
+modern_2018_2025_M4,3098,173,173,-351.749220331217,188.081505326447,18,"t5dalf, t5dben, t5dbra, t5dbrm, t5dbrw, t5dcoo, t5dlig, t5dlot, t5dmas, t5dmer, t5dre2, t5dren, t5dtyr, t5dvan, t5dwal, t5dwil"

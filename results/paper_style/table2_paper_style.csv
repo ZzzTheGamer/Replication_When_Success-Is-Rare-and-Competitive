@@ -1,0 +1,60 @@
+Variable,Published_1,Published_2,Published_3,Published_4,R_1,R_2,R_4
+Cumulative Races,"0.0118***
+(0.0018)","","0.0123***
+(0.0020)","","0.0118***
+(0.0018)","",""
+Cumulative Wins,"","0.0416***
+(0.0040)","","0.0426***
+(0.0043)","","0.0416***
+(0.0040)","0.0426***
+(0.0043)"
+Cumulative Teammate Wins,"","0.0280***
+(0.0073)","","0.0175*
+(0.0078)","","0.0280***
+(0.0073)","0.0175*
+(0.0078)"
+Cumulative Car DNF,"","0.0162**
+(0.0054)","","0.0189**
+(0.0062)","","0.0162**
+(0.0054)","0.0189**
+(0.0062)"
+Cumulative Driver DNF,"","-0.0223
+(0.0116)","","-0.0135
+(0.0125)","","-0.0223
+(0.0116)","-0.0135
+(0.0125)"
+Cumulative Teammate Car DNF,"","-0.0059
+(0.0049)","","-0.0066
+(0.0052)","","-0.0059
+(0.0049)","-0.0066
+(0.0052)"
+Cumulative Teammate Driver DNF,"","0.0219*
+(0.0089)","","0.0269**
+(0.0095)","","0.0219*
+(0.0089)","0.0269**
+(0.0095)"
+(Cumulative Races)^2,"-0.00004***
+(0.00001)","-0.00004***
+(0.00001)","-0.00005***
+(0.00001)","-0.00006***
+(0.00001)","-0.00004***
+(0.00001)","-0.00004***
+(0.00001)","-0.00006***
+(0.00001)"
+Team fixed effects,No,No,Yes,Yes,No,No,Yes
+Grid Position,"-0.5209***
+(0.0243)","-0.4798***
+(0.0236)","-0.4740***
+(0.0251)","-0.4388***
+(0.0242)","-0.5209***
+(0.0243)","-0.4798***
+(0.0236)","-0.4388***
+(0.0242)"
+Age,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Home edge,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Wet weather conditions,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Permanent track,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Occasional track,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Number of drivers starting,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Constant,Yes,Yes,Yes,Yes,Yes,Yes,Yes
+Wald chi2,642.30***,863.91***,736.97***,915.82***,642.30***,863.91***,915.82***

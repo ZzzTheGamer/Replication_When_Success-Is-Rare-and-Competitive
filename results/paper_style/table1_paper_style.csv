@@ -1,0 +1,17 @@
+Variable,Published_mean,Published_sd,Published_min,Published_max,R_mean,R_sd,R_min,R_max
+Win,0.0448,0.2069,0,1,0.0448,0.2069,0,1
+Podium,0.1342,0.3406,0,1,0.1342,0.3406,0,1
+Cumulative Races,59.85,59.86,0,321,59.85,59.86,0,321
+Cumulative Wins,3.81,9.72,0,91,3.81,9.72,0,91
+Cumulative Teammate Wins,3.27,6.73,0,55,3.27,6.73,0,55
+Cumulative Car DNF,16.69,17.03,0,113,16.69,17.03,0,113
+Cumulative Driver DNF,7.26,7.52,0,39,7.26,7.52,0,39
+Cumulative Teammate Car DNF,15.69,16.29,0,92,15.69,16.29,0,92
+Cumulative Teammate Driver DNF,7.30,8.27,0,45,7.30,8.27,0,45
+Grid Position,11.96,6.84,1,34,11.96,6.84,1,34
+Age,30.13,5.14,17.46,55.80,30.13,5.14,17.46,55.80
+Home Edge,0.0828,0.2756,0,1,0.0828,0.2756,0,1
+Wet Weather Conditions,0.1575,0.3643,0,1,0.1575,0.3643,0,1
+Permanent Track,0.7301,0.4439,0,1,0.7301,0.4439,0,1
+Occasional Track,0.1534,0.3604,0,1,0.1534,0.3604,0,1
+Number of Drivers Starting,22.83,3.03,6,34,22.83,3.03,6,34
