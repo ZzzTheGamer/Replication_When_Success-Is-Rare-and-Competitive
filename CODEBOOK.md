@@ -28,8 +28,8 @@ The extension includes main races only. The 2018–2025 period contains 173 race
 | `grid` | Race participation increment | `1/ncs`, preventing multiple cars driven by the same driver in the same race from being counted as multiple races. |
 | `xwin` | Win increment | `win/nds`, allocating historical win experience by the number of drivers sharing the car. |
 | `pod` | Podium share | `I(finish <= 3)/nds`; used in Table 1. |
-| `dnfc` | Binary | 1 if the driver does not finish the current race for car-related reasons. |
-| `dnfd` | Binary | 1 if the driver does not finish the current race for reasons related to driving, accidents, physical condition, or sporting rules. |
+| `dnfc` | Binary | Car-failure indicator, covering car-related retirements and technical disqualifications. |
+| `dnfd` | Binary | Driver-failure indicator, covering retirements due to driving, accidents, or physical condition, and sporting disqualifications. |
 | `tw` | Teammate win increment | `sum(xwin)/ncs - xwin`, summed over all original rows for the same team in the same race. |
 | `tfc` | Teammate car-failure increment | `sum(dnfc)/ncs - dnfc`, with the same summation group. |
 | `tfd` | Teammate driver-failure increment | `sum(dnfd)/ncs - dnfd`, with the same summation group. |
@@ -69,26 +69,28 @@ Implementation: `prior_exposure()` and `add_experience()` in `R/functions.R`. Hi
 | `rcocc` | Binary | 1 for a temporary / street track, 0 otherwise. `rcperm=0` and `rcocc=0` identify the semi-permanent reference category. |
 | `rcstarters` | Number of drivers | Actual starters in the race. In the extension, this is counted after excluding nonstarters, preserving the actual field size. |
 
-Historical control and team-indicator validation is saved in `results/checks/control_validation.csv`. Race-level weather and track classifications for the extension, with supporting evidence and sources, are recorded in `data/manual/race_coding.csv`.
+Historical control and team-indicator validation is saved in `results/checks/control_validation.csv`. Race-level weather and track classifications for the extension, with supporting evidence and sources, are recorded in `data/manual/race_coding.csv`. Spa retains the paper's semi-permanent reference category in the extension, with `rcperm=0, rcocc=0`; permanent-track coding is examined as an alternative specification.
 
 ## 5. Retirement Classification and Historical Agreement
 
-`data/manual/status_mapping.csv` classifies all API status values. The rules are as follows:
+`data/manual/status_mapping.csv` provides the initial classification of all API status values. Extension-period retirement reasons are then checked against race reports and individually reviewed coding tables. The initial mapping rules are:
 
 | Category | Classification rule | Event variables |
 |---|---|---|
-| `none` | Normal finishes and finishes laps behind the winner. | `dnfc=0, dnfd=0` |
+| `none` | Normal finishes and finishes laps behind the winner; extension records confirmed as early retirements are recoded by cause. | `dnfc=0, dnfd=0` |
 | `car` | Status explicitly attributes the outcome to mechanical, component, or resource-related causes. | `dnfc=1, dnfd=0` |
-| `driver` | Status attributes the outcome to accidents, collisions, spinning off, physical conditions, or sporting rules; the main classification assigns disqualifications to this category. | `dnfc=0, dnfd=1` |
-| `unknown` | Status gives no reason that permits car / driver classification. | Assigned after individual verification in the extension period. |
+| `driver` | Status explicitly attributes the outcome to accidents, collisions, spinning off, or physical conditions; disqualifications are classified separately by their reviewed causes. | `dnfc=0, dnfd=1` |
+| `unknown` | Status gives no reason that permits car / driver classification; generic `Disqualified` and `Excluded` labels require the underlying reason. | Assigned after individual verification in the extension period. |
 | `withdrawal` | Withdrawn entries; whether the driver actually started distinguishes nonstarts from withdrawals during the race. | Treated according to start status and the verified reason. |
 | `nonstarter` | Did not actually start. | Excluded; no experience increment. |
 
-Zero completed laps alone do not determine whether a driver started; result status and race reports are used to identify actual starts. Early retirements are coded by cause even if the results list still assigns an official classified position.
+Zero completed laps alone do not determine whether a driver started; result status and race reports are used to identify actual starts. `Finished`, `+n Laps`, and `Lapped` labels are also checked against retirement reasons in race reports. Early retirements are coded by cause even when the driver receives an official classified position. A record with a reported retirement reason but a final category of `none` requires review. These checks are saved in `classified_retirement_audit.csv`; classification completeness and coding-rule checks are summarized in `coding_consistency.csv`. `R/check_coding.R` checks source-documented race events and when their flags enter subsequent own and teammate cumulative histories.
 
-For the extension period, `dnf_overrides.csv` supplies the reason, final category, and source for 161 records with unspecified causes. Individual reviews of disqualifications and alternative classifications are stored in `dsq_sensitivity.csv`, supporting sensitivity estimates that reclassify technical disqualifications as car failures.
+`dnf_overrides.csv` records individually reviewed retirement reasons, final categories, and sources. Where evidence shows that an accident or collision caused subsequent component damage, the event is classified as a driver failure. A mechanical fault preceding and causing an accident is classified as a car failure. Records with an unclear initiating cause or event sequence are flagged as ambiguous, and their alternative classifications are used to rebuild experience and re-estimate the models.
 
-Historical agreement is evaluated against the authors' `dnfc` and `dnfd` labels without replacing their event flags. Records are first linked by driver identity, year, round, and car number. If car numbers differ but the driver–race result is unique, that unique result is used to complete the link. Outputs report linkage coverage, agreement across all linked observations, and agreement within the authors' retirement subsample. The same agreement rates are also reported for informative status values. The conservative measure counts unknown categories and conflicting start statuses as disagreements. Metrics and the contingency table are saved in `status_agreement_metrics.csv` and `status_confusion_matrix.csv`, respectively.
+Primary disqualification classifications are set in `disqualification_coding.csv`: technical violations are car failures, while sporting exclusions such as outside assistance are driver failures. Assigning all disqualifications to the driver category is examined as an alternative specification.
+
+Historical agreement evaluates the initial status mapping against the authors' `dnfc` and `dnfd` labels without replacing their event flags. Records are first linked by driver identity, year, round, and car number. If car numbers differ but the driver–race result is unique, that unique result is used to complete the link. Outputs report linkage coverage, agreement across all linked observations, and agreement within the authors' retirement subsample. The same agreement rates are also reported for informative status values. Historical disqualification labels without a specific cause remain unknown. The conservative measure counts unknown categories and conflicting start statuses as disagreements. Metrics and the contingency table are saved in `status_agreement_metrics.csv` and `status_confusion_matrix.csv`, respectively.
 
 ## 6. Team Indicators
 
@@ -122,7 +124,7 @@ model_4 <- update(model_2, . ~ . +
 
 Model (1) estimates total racing experience and its square. Model (2) separates own and teammate experience into success and two types of failure while retaining squared racing experience. Model (4) adds the team indicators above. All three models include an intercept. The extension applies the same model (4) specification to 1950–2025 and 2018–2025 separately.
 
-Race random-intercept checks use `lme4::glmer`, adding `(1 | racenr)` to the fixed-effects formula and using Laplace integration. In all five models, the race random-intercept variance is at the numerical zero boundary, and fixed coefficients differ from ordinary logit by less than `2e-6`. Reported coefficients therefore use `glm(..., family=binomial(link="logit"))`. For numerical stability, `crace2` is divided by 10,000 in the random-intercept checks and converted back to its original units for output.
+Race random-intercept checks use `lme4::glmer`, adding `(1 | racenr)` to the fixed-effects formula and using Laplace integration. In all five models, the race random-intercept variance is at the numerical zero boundary, and fixed coefficients agree with ordinary logit to numerical precision. Reported coefficients therefore use `glm(..., family=binomial(link="logit"))`. For numerical stability, `crace2` is divided by 10,000 in the random-intercept checks and converted back to its original units for output.
 
 Standard errors are clustered by race using:
 
@@ -136,7 +138,7 @@ In the modern sample, the Williams team indicator perfectly predicts non-winning
 
 ## 8. Comparing Car-Failure Experience across Periods
 
-The comparison uses the `cfc` coefficients from historical model (4) and modern model (4), defined as:
+The comparison uses the `cfc` coefficients from model (4) for 1950–2017 and model (4) for 2018–2025, defined as:
 
 ```text
 delta = beta_cfc_2018_2025 - beta_cfc_1950_2017
@@ -147,3 +149,5 @@ z = delta / SE(delta)
 Race clusters do not overlap between the two periods, so cross-period covariance is set to zero under race-clustered inference. The two-sided null is `delta=0`; the one-sided alternative for weaker learning is `delta<0`. All coefficients are estimated separately across periods. Output is saved in `results/tables/car_failure_coefficient_change.csv`.
 
 Car-failure rates in each period use actual-start observations: `sum(dnfc)/number of start records`. Perfect-prediction exclusions in the modern regression do not change this denominator. Annual and period summaries are saved in `annual_failure_rates.csv` and `failure_rates_by_period.csv`, respectively.
+
+Sensitivity analyses separately reverse ambiguous retirement classifications, assign all disqualifications to driver failure, code the 2022 Miami race as dry, code Spa as permanent, and exclude pit-lane starts. Each specification re-estimates model (4) for 2018–2025; Miami weather and Spa track type are tested separately. Changes to event classifications first rebuild the affected own and teammate cumulative histories. Excluding pit-lane starts changes only the estimation sample and retains their experience histories. `results/tables/sensitivity_failure_experience.csv` records estimates, standard errors, tests, confidence intervals, and sample sizes for `cfc` and `cfd`; `sensitivity_car_failure.csv` contains only the `cfc` results.

@@ -1,12 +1,13 @@
 author_category,status_category,N
 none,none,12293
 car,car,6050
-none,unknown,166
+none,unknown,167
 none,car,32
-driver,driver,2412
-car,unknown,69
-car,driver,233
-none,driver,9
+driver,driver,2359
+car,unknown,145
+car,driver,157
+driver,unknown,65
+none,driver,8
 car,,2
 driver,car,128
 car,none,68
@@ -15,4 +16,3 @@ driver,nonstarter,3
 none,,1
 car,nonstarter,1
 driver,none,5
-driver,unknown,12

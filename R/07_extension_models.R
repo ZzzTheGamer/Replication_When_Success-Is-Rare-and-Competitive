@@ -60,20 +60,17 @@ rebuild_sensitivity <- function(kind) {
     oldcar <- x$dnfc[ii]
     x[ii, `:=`(dnfc = 1L - oldcar, dnfd = oldcar)]
   }
-  if (kind == "technical_disqualifications_as_car") {
-    dsq <- read_csv("data/manual/dsq_sensitivity.csv")
-    nf <- merge(extended$new_flags[status_api == "Disqualified"], dsq,
-                by = c("year", "round", "driver_api"))
-    stopifnot(nrow(nf) == sum(extended$new_flags$status_api == "Disqualified"))
-    nf <- nf[dsq_category == "car"]
-    x[nf, on = .(racenr, driverid), `:=`(dnfc = 1L, dnfd = 0L)]
+  if (kind == "all_disqualifications_as_driver") {
+    nf <- extended$new_flags[status_api %in% c("Disqualified", "Excluded")]
+    x[nf, on = .(racenr, driverid), `:=`(dnfc = 0L, dnfd = 1L)]
   }
-  if (kind == "weather_and_track_alternative") {
+  if (kind == "miami_2022_dry") {
     x[year >= 2018 & year == 2022 & round == 5, rcwet := 0L]
-    # Alternative preserves the author's historical Spa type rather than the
-    # contemporary permanent-facility label in Wikipedia.
+  }
+  if (kind == "spa_permanent") {
+    # The primary definition preserves the author's semi-permanent category.
     spa_races <- extended$new_flags[circuit_id == "spa", unique(racenr)]
-    x[racenr %in% spa_races, rcperm := 0L]
+    x[racenr %in% spa_races, rcperm := 1L]
   }
   add_experience(x)
   x <- x[ncs <= 1 & year >= 2018]
@@ -81,12 +78,15 @@ rebuild_sensitivity <- function(kind) {
   z <- prepare_m4_sample(x)$data
   sample_n <- nrow(z)
   res <- fit_one(z, model4_rhs, paste0("sensitivity_", kind), check_random = FALSE)
-  res$coefficients[term == "cfc", .(scenario = kind, estimate, se, p, conf_low, conf_high,
+  res$coefficients[term %in% c("cfc", "cfd"), .(scenario = kind, term, estimate, se, p, conf_low, conf_high,
                                     n = sample_n)]
 }
-sens <- rbindlist(lapply(c("ambiguous_retirements_reversed", "technical_disqualifications_as_car",
-                          "weather_and_track_alternative", "exclude_pitlane_starts"), rebuild_sensitivity))
-write_csv(sens, "results/tables/sensitivity_car_failure.csv")
+sens <- rbindlist(lapply(c("ambiguous_retirements_reversed", "all_disqualifications_as_driver",
+                          "miami_2022_dry", "spa_permanent", "exclude_pitlane_starts"),
+                        rebuild_sensitivity))
+write_csv(sens, "results/tables/sensitivity_failure_experience.csv")
+write_csv(sens[term == "cfc", setdiff(names(sens), "term"), with = FALSE],
+          "results/tables/sensitivity_car_failure.csv")
 saveRDS(list(full = full_fit, modern = modern_fit, change = change,
              sensitivity = sens, modern_separation = modern_sample$separated),
         "results/models/extension_fits.rds")

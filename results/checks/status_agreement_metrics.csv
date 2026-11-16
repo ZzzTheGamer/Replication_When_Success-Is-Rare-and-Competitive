@@ -2,10 +2,10 @@ metric,value
 original_model_rows,21487
 linked_rows,21481
 linked_percent,99.9720761390608
-informative_rows,21230
-agreement_all_linked_percent,96.6202690749965
-agreement_informative_percent,97.7626000942063
+informative_rows,21100
+agreement_all_linked_percent,96.3735394069177
+agreement_informative_percent,98.1137440758294
 author_dnf_linked,8981
-author_dnf_informative,8896
-agreement_author_dnf_all_linked_percent,94.2211335040641
-agreement_author_dnf_informative_percent,95.1214028776979
+author_dnf_informative,8767
+agreement_author_dnf_all_linked_percent,93.6309987751921
+agreement_author_dnf_informative_percent,95.9165050758526

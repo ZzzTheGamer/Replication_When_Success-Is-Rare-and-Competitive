@@ -147,13 +147,16 @@ ggsave("results/figures/figure2_car_failure_coefficients.png",q,width=8,height=3
 # Every numeric CSV has a human-readable HTML companion, all rendered in R.
 for(f in c("results/tables/car_failure_coefficient_change.csv",
            "results/tables/sensitivity_car_failure.csv","results/tables/model_samples.csv",
+           "results/tables/sensitivity_failure_experience.csv",
            "results/checks/status_agreement_metrics.csv","results/checks/status_confusion_matrix.csv",
-           "results/checks/cumulative_validation.csv","results/checks/random_intercept_checks.csv"))
+           "results/checks/cumulative_validation.csv","results/checks/random_intercept_checks.csv",
+           "results/checks/coding_consistency.csv"))
   html_table(read_csv(f),sub(".csv$",".html",f),tools::file_path_sans_ext(basename(f)),digits=6)
 
 write_session_info("results/sessionInfo.txt")
 sources <- c(list.files("data/manual",full.names=TRUE),
              list.files("data/raw/jolpica",full.names=TRUE),
+             list.files("data/raw/wikipedia", pattern="\\.html$", full.names=TRUE),
              file.path(author_dir,c("F1DataMainVariables.xlsx","F1StataData.dta","F1VariableDictionary.xlsx")))
 manifest <- data.table(file=sources,sha256=vapply(sources,function(f)digest::digest(file=f,algo="sha256"),character(1)))
 manifest[file %in% file.path(author_dir, c("F1DataMainVariables.xlsx", "F1StataData.dta",

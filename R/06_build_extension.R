@@ -13,6 +13,16 @@ new <- merge(new, wiki[, .(year, round, car_api, wiki_driver, wiki_position, wik
 write_csv(new[is.na(wiki_position)], "results/checks/new_missing_wiki_classification.csv")
 stopifnot(!anyNA(new$wiki_position))
 
+# Reviewed records must identify a real API entry, including entries subsequently
+# excluded as nonstarters. Their classification is applied only to actual starts.
+overrides <- read_csv("data/manual/dnf_overrides.csv")
+coding_keys <- c("year", "round", "driver_api")
+stopifnot(!anyDuplicated(overrides[, ..coding_keys]),
+          all(overrides$reviewed == 1),
+          all(overrides$category %in% c("car", "driver")),
+          all(nzchar(overrides$source_url)),
+          !nrow(overrides[!new, on = coding_keys]))
+
 # DNS/DNQ records create no cumulative racing experience. Zero-lap first-lap
 # accidents do count as starts, so do not exclude a row merely because laps=0.
 new[, nonstarter := grepl("^DNS|^DNQ|^DNP", wiki_position) |
@@ -20,17 +30,54 @@ new[, nonstarter := grepl("^DNS|^DNQ|^DNP", wiki_position) |
 write_csv(new[nonstarter == TRUE], "results/checks/excluded_new_nonstarters.csv")
 new <- new[nonstarter == FALSE]
 
-# Resolve uninformative Retired statuses with explicit, reviewed row-level inputs.
-overrides <- read_csv("data/manual/dnf_overrides.csv")
-stopifnot(!anyDuplicated(overrides[, .(year, round, driver_api)]),
-          all(overrides$reviewed == 1))
-new[, category := status_category]
+# Apply documented initiating causes, including classified retirements and
+# collision damage hidden behind an API component-failure label.
+new[, `:=`(category = status_category, reviewed_override = FALSE,
+           coding_source = "API status", classification_source_url = race_url)]
 new[overrides, on = .(year, round, driver_api),
-    `:=`(category = i.category, override_ambiguous = i.ambiguous)]
+    `:=`(category = i.category, override_ambiguous = i.ambiguous,
+         reviewed_override = TRUE, coding_source = "Reviewed race report",
+         classification_source_url = i.source_url)]
 new[is.na(override_ambiguous), override_ambiguous := 0L]
+
+# Generic disqualification statuses cannot distinguish technical and sporting
+# causes. Every retained disqualification receives a reviewed primary category.
+disqualifications <- read_csv("data/manual/disqualification_coding.csv")
+dsq_rows <- new[status_api %in% c("Disqualified", "Excluded")]
+stopifnot(!anyDuplicated(disqualifications[, ..coding_keys]),
+          all(disqualifications$dsq_category %in% c("car", "driver")),
+          all(nzchar(disqualifications$source_url)),
+          nrow(dsq_rows) == nrow(disqualifications),
+          !nrow(dsq_rows[!disqualifications, on = coding_keys]),
+          !nrow(disqualifications[!dsq_rows, on = coding_keys]))
+new[disqualifications, on = .(year, round, driver_api),
+    `:=`(category = i.dsq_category, reviewed_override = TRUE,
+         coding_source = "Reviewed disqualification",
+         classification_source_url = i.source_url)]
+
+new[, reported_retirement := report_has_retirement_reason(wiki_reason)]
+classified_audit <- new[status_category == "none",
+  .(year, round, driver_api, status_api, wiki_position, wiki_reason,
+    reported_retirement, category, reviewed_override, classification_source_url)]
+write_csv(classified_audit, "results/checks/classified_retirement_audit.csv")
 unresolved <- new[!category %in% c("none", "car", "driver")]
 write_csv(unresolved, "results/checks/unresolved_new_statuses.csv")
-if (nrow(unresolved)) stop("Resolve the remaining new-period DNF reasons first")
+missed_retirements <- new[category == "none" & reported_retirement == TRUE]
+write_csv(missed_retirements, "results/checks/retirement_reasons_to_review.csv")
+unreviewed_collision_damage <- new[category == "car" &
+  grepl("accident|collision|crash|spun", wiki_reason, ignore.case = TRUE) &
+  reviewed_override == FALSE]
+write_csv(unreviewed_collision_damage, "results/checks/collision_reasons_to_review.csv")
+coding_checks <- data.table(
+  check = c("unresolved_retirement_categories", "reported_retirement_coded_none",
+            "unreviewed_collision_damage", "disqualification_coverage"),
+  failures = c(nrow(unresolved), nrow(missed_retirements),
+               nrow(unreviewed_collision_damage),
+               abs(nrow(dsq_rows) - nrow(disqualifications))))
+coding_checks[, passed := failures == 0L]
+write_csv(coding_checks, "results/checks/coding_consistency.csv")
+if (!all(coding_checks$passed))
+  stop("Resolve the coding records listed in results/checks before estimation.")
 new[, `:=`(dnfc = as.integer(category == "car"), dnfd = as.integer(category == "driver"),
            win = as.integer(finish_api == 1), finish = finish_api,
            ncs = 1, nds = 1, car = as.numeric(car_api))]
@@ -131,6 +178,14 @@ write_csv(history, "results/checks/history_continuity.csv")
 analysis <- all_rows[ncs <= 1]
 stopifnot(!anyDuplicated(analysis[, .(racenr, driverid)]),
           all(analysis[year >= 2018, sum(win), by = racenr]$V1 == 1))
+
+# Check documented starts and retirements and their contributions to subsequent
+# own and teammate histories.
+source("R/check_coding.R")
+case_checks <- check_coding_cases(new, all_rows)
+coding_checks <- rbindlist(list(coding_checks, case_checks), use.names = TRUE)
+write_csv(coding_checks, "results/checks/coding_consistency.csv")
+if (!all(coding_checks$passed)) stop("Source-based coding checks failed.")
 # Two original races lose their shared-drive winners when ncs>1 is excluded.
 # Preserve that published sample rather than adding the winners back.
 write_csv(analysis[, .(wins = sum(win)), by = .(year, round, racenr)][wins != 1],

@@ -48,7 +48,7 @@ Damage,car,Damaged component without an explicit collision status: car in primar
 Debris,car,Damaged component without an explicit collision status: car in primary rule; root cause may be a collision.
 Did not start,nonstarter,No race start: excluded from the driver-race sample and cumulative exposure.
 Differential,car,Explicit mechanical/component/fuel failure; operational car-failure category.
-Disqualified,driver,Status alone does not distinguish technical from sporting disqualification; primary rule assigns driver. Flag this ambiguity and test technical-DSQ recoding separately.
+Disqualified,unknown,Generic exclusion does not identify technical versus sporting cause; modern records require individual reason review.
 Distributor,car,Explicit mechanical/component/fuel failure; operational car-failure category.
 Driver Seat,car,Explicit mechanical/component/fuel failure; operational car-failure category.
 Driver unwell,driver,"Accident/collision, sporting exclusion or physical driver issue; status-based category does not establish fault."
@@ -60,7 +60,7 @@ Engine,car,Explicit mechanical/component/fuel failure; operational car-failure c
 Engine fire,car,Explicit mechanical/component/fuel failure; operational car-failure category.
 Engine misfire,car,Explicit mechanical/component/fuel failure; operational car-failure category.
 ERS,car,Explicit mechanical/component/fuel failure; operational car-failure category.
-Excluded,driver,Status alone does not distinguish technical from sporting disqualification; primary rule assigns driver. Flag this ambiguity and test technical-DSQ recoding separately.
+Excluded,unknown,Generic exclusion does not identify technical versus sporting cause; modern records require individual reason review.
 Exhaust,car,Explicit mechanical/component/fuel failure; operational car-failure category.
 Eye injury,driver,"Accident/collision, sporting exclusion or physical driver issue; status-based category does not establish fault."
 Fatal accident,driver,"Accident/collision, sporting exclusion or physical driver issue; status-based category does not establish fault."

@@ -2,6 +2,11 @@
 write_csv <- function(x, file) data.table::fwrite(x, file, na = "")
 read_csv <- function(file) data.table::fread(file, na.strings = c("", "NA"))
 
+report_has_retirement_reason <- function(reason) {
+  text <- trimws(gsub("\\[[^]]*\\]", "", reason))
+  !is.na(text) & nzchar(text) & !grepl("^[+]?[0-9]", text)
+}
+
 write_session_info <- function(file) {
   info <- sessionInfo()
   for (field in c("BLAS", "LAPACK")) {
