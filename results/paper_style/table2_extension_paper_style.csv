@@ -7,27 +7,27 @@ Cumulative Wins,"0.0426***
 Cumulative Teammate Wins,"0.0175*
 (0.0078)","0.0175*
 (0.0078)","0.0073
-(0.0058)","0.0095
+(0.0058)","0.0093
 (0.0176)"
 Cumulative Car DNF,"0.0189**
 (0.0062)","0.0189**
 (0.0062)","0.0113
 (0.0058)","0.0127
-(0.0546)"
+(0.0545)"
 Cumulative Driver DNF,"-0.0135
 (0.0125)","-0.0135
 (0.0125)","0.0047
-(0.0113)","0.1595**
+(0.0113)","0.1594**
 (0.0516)"
 Cumulative Teammate Car DNF,"-0.0066
 (0.0052)","-0.0066
 (0.0052)","-0.0020
-(0.0050)","0.0219
+(0.0050)","0.0218
 (0.0474)"
 Cumulative Teammate Driver DNF,"0.0269**
 (0.0095)","0.0269**
 (0.0095)","0.0088
-(0.0075)","-0.0897
+(0.0075)","-0.0898
 (0.0554)"
 (Cumulative Races)^2,"-0.00006***
 (0.00001)","-0.00006***
@@ -38,8 +38,8 @@ Team fixed effects,Yes,Yes,Yes,Yes
 Grid Position,"-0.4388***
 (0.0242)","-0.4388***
 (0.0242)","-0.4514***
-(0.0238)","-0.4875***
-(0.0997)"
+(0.0238)","-0.4877***
+(0.0998)"
 Age,Yes,Yes,Yes,Yes
 Home edge,Yes,Yes,Yes,Yes
 Wet weather conditions,Yes,Yes,Yes,Yes
@@ -47,6 +47,6 @@ Permanent track,Yes,Yes,Yes,Yes
 Occasional track,Yes,Yes,Yes,Yes
 Number of drivers starting,Yes,Yes,Yes,Yes
 Constant,Yes,Yes,Yes,Yes
-Observations,"21,487","21,487","24,928","3,098"
+Observations,"21,487","21,487","24,927","3,097"
 Number of races,965,965,"1,138",173
-Wald chi2,915.82***,915.82***,1060.12***,189.43***
+Wald chi2,915.82***,915.82***,1060.21***,190.44***

@@ -23,9 +23,11 @@ stopifnot(!anyDuplicated(overrides[, ..coding_keys]),
           all(nzchar(overrides$source_url)),
           !nrow(overrides[!new, on = coding_keys]))
 
-# DNS/DNQ records create no cumulative racing experience. Zero-lap first-lap
-# accidents do count as starts, so do not exclude a row merely because laps=0.
+# DNS/DNQ and zero-lap WD records create no cumulative racing experience.
+# A pre-race illness can have an API failure label rather than a DNS label.
+# Zero-lap first-lap accidents do count as starts, so laps=0 alone is insufficient.
 new[, nonstarter := grepl("^DNS|^DNQ|^DNP", wiki_position) |
+                      (grepl("^WD", wiki_position) & laps_api == 0L) |
                       status_category == "nonstarter"]
 write_csv(new[nonstarter == TRUE], "results/checks/excluded_new_nonstarters.csv")
 new <- new[nonstarter == FALSE]

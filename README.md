@@ -64,6 +64,12 @@ f1_replication/
 │   │   ├── jolpica/
 │   │   └── wikipedia/
 │   └── processed/
+├── report/
+│   ├── Empirical.pdf
+│   ├── Empirical.tex
+│   ├── README.md
+│   ├── tables/
+│   └── figures/
 └── results/
     ├── paper_style/
     ├── tables/
@@ -107,6 +113,8 @@ f1_replication/
 
 ## Results
 
+- `report/Empirical.pdf`: the empirical write-up.
+- `report/Empirical.tex`: the LaTeX source, with supporting tables and figures in `report/tables/` and `report/figures/`. Compilation instructions are in `report/README.md`.
 - `results/paper_style/paper_style_comparison_tables.pdf`: Table 1, Table 2, and the model (4) extension comparison. The HTML version is `index.html` in the same directory.
 - `results/paper_style/refitted_coefficients.csv`: complete coefficients, clustered standard errors, tests, and confidence intervals for the five models.
 - `results/paper_style/refitted_model_metadata.csv`: model formulas, sample sizes, race counts, and fit statistics.
@@ -117,5 +125,6 @@ f1_replication/
 - `results/checks/`: validation of cumulative variables, controls, classification agreement, sample coverage, and estimation.
 - `results/checks/coding_consistency.csv`: classification completeness and coding-rule checks.
 - `results/checks/classified_retirement_audit.csv`: checks of API completion labels against retirement reasons in race reports.
+- `results/checks/excluded_new_nonstarters.csv`: excluded nonstarter records, including API statuses, race-report classifications, reasons, and source URLs.
 
 `results/checks/input_sha256_manifest.csv` records SHA-256 hashes for the manual inputs, API cache, and key author files to identify the data snapshot used in the analysis.

@@ -1,0 +1,39 @@
+\begin{table}[!htbp]
+\centering
+\caption{Replication of the original Table 2}
+\label{tab:replication}
+\fontsize{8.5}{10}\selectfont
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.10}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrrr@{}}
+\toprule
+ & \multicolumn{2}{c}{Model (1)} & \multicolumn{2}{c}{Model (2)} & \multicolumn{2}{c}{Model (4)} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-7}
+Variable & Published & R & Published & R & Published & R \\
+\midrule
+Prior starts & \shortstack[r]{$0.0118^{***}$\\{\scriptsize (0.0018)}} & \shortstack[r]{$0.0118^{***}$\\{\scriptsize (0.0018)}} & {--} & {--} & {--} & {--} \\
+Own wins & {--} & {--} & \shortstack[r]{$0.0416^{***}$\\{\scriptsize (0.0040)}} & \shortstack[r]{$0.0416^{***}$\\{\scriptsize (0.0040)}} & \shortstack[r]{$0.0426^{***}$\\{\scriptsize (0.0043)}} & \shortstack[r]{$0.0426^{***}$\\{\scriptsize (0.0043)}} \\
+Teammate wins & {--} & {--} & \shortstack[r]{$0.0280^{***}$\\{\scriptsize (0.0073)}} & \shortstack[r]{$0.0280^{***}$\\{\scriptsize (0.0073)}} & \shortstack[r]{$0.0175^{*}$\\{\scriptsize (0.0078)}} & \shortstack[r]{$0.0175^{*}$\\{\scriptsize (0.0078)}} \\
+Own car failures & {--} & {--} & \shortstack[r]{$0.0162^{**}$\\{\scriptsize (0.0054)}} & \shortstack[r]{$0.0162^{**}$\\{\scriptsize (0.0054)}} & \shortstack[r]{$0.0189^{**}$\\{\scriptsize (0.0062)}} & \shortstack[r]{$0.0189^{**}$\\{\scriptsize (0.0062)}} \\
+Own driver failures & {--} & {--} & \shortstack[r]{$-0.0223$\\{\scriptsize (0.0116)}} & \shortstack[r]{$-0.0223$\\{\scriptsize (0.0116)}} & \shortstack[r]{$-0.0135$\\{\scriptsize (0.0125)}} & \shortstack[r]{$-0.0135$\\{\scriptsize (0.0125)}} \\
+Teammate car failures & {--} & {--} & \shortstack[r]{$-0.0059$\\{\scriptsize (0.0049)}} & \shortstack[r]{$-0.0059$\\{\scriptsize (0.0049)}} & \shortstack[r]{$-0.0066$\\{\scriptsize (0.0052)}} & \shortstack[r]{$-0.0066$\\{\scriptsize (0.0052)}} \\
+Teammate driver failures & {--} & {--} & \shortstack[r]{$0.0219^{*}$\\{\scriptsize (0.0089)}} & \shortstack[r]{$0.0219^{*}$\\{\scriptsize (0.0089)}} & \shortstack[r]{$0.0269^{**}$\\{\scriptsize (0.0095)}} & \shortstack[r]{$0.0269^{**}$\\{\scriptsize (0.0095)}} \\
+Prior starts squared & \shortstack[r]{$-0.00004^{***}$\\{\scriptsize (0.00001)}} & \shortstack[r]{$-0.00004^{***}$\\{\scriptsize (0.00001)}} & \shortstack[r]{$-0.00004^{***}$\\{\scriptsize (0.00001)}} & \shortstack[r]{$-0.00004^{***}$\\{\scriptsize (0.00001)}} & \shortstack[r]{$-0.00006^{***}$\\{\scriptsize (0.00001)}} & \shortstack[r]{$-0.00006^{***}$\\{\scriptsize (0.00001)}} \\
+Team indicators & No & No & No & No & Yes & Yes \\
+Grid position & \shortstack[r]{$-0.5209^{***}$\\{\scriptsize (0.0243)}} & \shortstack[r]{$-0.5209^{***}$\\{\scriptsize (0.0243)}} & \shortstack[r]{$-0.4798^{***}$\\{\scriptsize (0.0236)}} & \shortstack[r]{$-0.4798^{***}$\\{\scriptsize (0.0236)}} & \shortstack[r]{$-0.4388^{***}$\\{\scriptsize (0.0242)}} & \shortstack[r]{$-0.4388^{***}$\\{\scriptsize (0.0242)}} \\
+Age & Yes & Yes & Yes & Yes & Yes & Yes \\
+Home race & Yes & Yes & Yes & Yes & Yes & Yes \\
+Wet weather & Yes & Yes & Yes & Yes & Yes & Yes \\
+Permanent track & Yes & Yes & Yes & Yes & Yes & Yes \\
+Occasional track & Yes & Yes & Yes & Yes & Yes & Yes \\
+Number of starters & Yes & Yes & Yes & Yes & Yes & Yes \\
+Constant & Yes & Yes & Yes & Yes & Yes & Yes \\
+Wald $\chi^2$ & $642.30^{***}$ & $642.30^{***}$ & $863.91^{***}$ & $863.91^{***}$ & $915.82^{***}$ & $915.82^{***}$ \\
+Observations & 21,487 & 21,487 & 21,487 & 21,487 & 21,487 & 21,487 \\
+\bottomrule
+\end{tabular*}
+\par\vspace{4pt}\begin{minipage}{\linewidth}\footnotesize
+Coefficients are in log-odds units. Standard errors clustered by race are in parentheses.
+$^{*}p<0.05$, $^{**}p<0.01$, $^{***}p<0.001$. A dash indicates a variable omitted from the specification.
+\end{minipage}
+\end{table}

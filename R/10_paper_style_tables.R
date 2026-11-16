@@ -202,7 +202,10 @@ tableE <- list(key = "table2_extension_paper_style", number = "Table 2E",
   row_types = ifelse(extension_terms %in% coefficient_terms, "coef", "info"),
   cells = cellsE, label_width = 2.85, header_height = .48,
   notes = c("Notes. Standard errors adjusted for clustering by race are in parentheses. All R columns re-estimate model (4) with the original control definitions and legacy team indicators; absent indicators are omitted in a subsample.",
-    "The modern sample contains 3,441 starts. Its regression excludes 343 Williams observations because the team indicator perfectly predicts non-winning; those observations remain in cumulative experience histories. The modern estimation sample is N = 3,098.",
+    sprintf("The modern sample contains %s starts. Its regression excludes %s Williams observations because the team indicator perfectly predicts non-winning; those observations remain in cumulative experience histories. The modern estimation sample is N = %s.",
+      format(extended$analysis[year >= 2018, .N], big.mark = ",", trim = TRUE),
+      format(fresh_meta[model == "modern_2018_2025_M4", excluded], big.mark = ",", trim = TRUE),
+      format(fresh_meta[model == "modern_2018_2025_M4", n], big.mark = ",", trim = TRUE)),
     "* Significant at 0.05; ** at 0.01; and *** at 0.001. Published column: Lapré and Cravey (2022), Table 2, model (4)."))
 
 paper_tables <- list(table1, table2, tableE)

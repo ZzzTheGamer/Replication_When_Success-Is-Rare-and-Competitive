@@ -30,7 +30,10 @@ check_coding_cases <- function(new_flags, all_rows) {
            nrow(z) == 1L && z$laps_api > 0L && z$dnfc == 1L)
   }
   for (v in list(c(2025, 1, "hadjar"), c(2022, 2, "mick_schumacher"),
-                 c(2023, 15, "stroll"))) {
+                 c(2023, 15, "stroll"), c(2021, 22, "mazepin"),
+                 c(2020, 4, "hulkenberg"), c(2020, 7, "sainz"),
+                 c(2021, 5, "leclerc"), c(2021, 14, "tsunoda"),
+                 c(2022, 2, "tsunoda"))) {
     record(paste(c(v, "pre_start_exclusion"), collapse = "_"),
            nrow(case(as.integer(v[1]), as.integer(v[2]), v[3])) == 0L)
   }
@@ -49,10 +52,15 @@ check_coding_cases <- function(new_flags, all_rows) {
          next_change(2024, 11, "norris", "cfd") == 1)
   record("classified_driver_failure_reaches_teammate_history",
          next_change(2024, 11, "piastri", "ctfd") == 1)
+  abu_dhabi <- new_flags[year == 2021 & round == 22]
+  record("abu_dhabi_2021_actual_starters",
+         nrow(abu_dhabi) == 19L && all(abu_dhabi$rcstarters == 19L))
+  record("pre_start_withdrawal_adds_no_teammate_failure",
+         next_change(2021, 22, "mick_schumacher", "ctfd") == 0)
   record("binary_exclusive_failure_flags",
          all(new_flags$dnfc %in% 0:1) && all(new_flags$dnfd %in% 0:1) &&
            all(new_flags$dnfc + new_flags$dnfd <= 1L))
-  record("modern_sample_size_and_races", nrow(new_flags) == 3441L &&
+  record("modern_sample_size_and_races", nrow(new_flags) == 3440L &&
            uniqueN(new_flags$racenr) == 173L)
   dsq <- new_flags[status_api %in% c("Disqualified", "Excluded")]
   record("primary_disqualification_causes",

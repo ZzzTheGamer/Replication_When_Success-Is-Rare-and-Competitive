@@ -1,0 +1,38 @@
+\begin{table}[!htbp]
+\centering
+\caption{Model (4) in the original and extension samples}
+\label{tab:extension}
+\small
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.10}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}
+\toprule
+Variable & 1950--2017 & 1950--2025 & 2018--2025 \\
+\midrule
+Own wins & \shortstack[r]{$0.0426^{***}$\\{\scriptsize (0.0043)}} & \shortstack[r]{$0.0409^{***}$\\{\scriptsize (0.0037)}} & \shortstack[r]{$0.0290^{***}$\\{\scriptsize (0.0083)}} \\
+Teammate wins & \shortstack[r]{$0.0175^{*}$\\{\scriptsize (0.0078)}} & \shortstack[r]{$0.0073$\\{\scriptsize (0.0058)}} & \shortstack[r]{$0.0093$\\{\scriptsize (0.0176)}} \\
+Own car failures & \shortstack[r]{$0.0189^{**}$\\{\scriptsize (0.0062)}} & \shortstack[r]{$0.0113$\\{\scriptsize (0.0058)}} & \shortstack[r]{$0.0127$\\{\scriptsize (0.0545)}} \\
+Own driver failures & \shortstack[r]{$-0.0135$\\{\scriptsize (0.0125)}} & \shortstack[r]{$0.0047$\\{\scriptsize (0.0113)}} & \shortstack[r]{$0.1594^{**}$\\{\scriptsize (0.0516)}} \\
+Teammate car failures & \shortstack[r]{$-0.0066$\\{\scriptsize (0.0052)}} & \shortstack[r]{$-0.0020$\\{\scriptsize (0.0050)}} & \shortstack[r]{$0.0218$\\{\scriptsize (0.0474)}} \\
+Teammate driver failures & \shortstack[r]{$0.0269^{**}$\\{\scriptsize (0.0095)}} & \shortstack[r]{$0.0088$\\{\scriptsize (0.0075)}} & \shortstack[r]{$-0.0898$\\{\scriptsize (0.0554)}} \\
+Prior starts squared & \shortstack[r]{$-0.00006^{***}$\\{\scriptsize (0.00001)}} & \shortstack[r]{$-0.00004^{***}$\\{\scriptsize (0.00001)}} & \shortstack[r]{$-0.00007^{***}$\\{\scriptsize (0.00002)}} \\
+Team indicators & Yes & Yes & Yes \\
+Grid position & \shortstack[r]{$-0.4388^{***}$\\{\scriptsize (0.0242)}} & \shortstack[r]{$-0.4514^{***}$\\{\scriptsize (0.0238)}} & \shortstack[r]{$-0.4877^{***}$\\{\scriptsize (0.0998)}} \\
+Age & Yes & Yes & Yes \\
+Home race & Yes & Yes & Yes \\
+Wet weather & Yes & Yes & Yes \\
+Permanent track & Yes & Yes & Yes \\
+Occasional track & Yes & Yes & Yes \\
+Number of starters & Yes & Yes & Yes \\
+Constant & Yes & Yes & Yes \\
+Observations & $21,487$ & $24,927$ & $3,097$ \\
+Number of races & $965$ & $1,138$ & $173$ \\
+Wald $\chi^2$ & $915.82^{***}$ & $1060.21^{***}$ & $190.44^{***}$ \\
+\bottomrule
+\end{tabular*}
+\par\vspace{4pt}\begin{minipage}{\linewidth}\footnotesize
+Coefficients are in log-odds units. Standard errors clustered by race are in parentheses.
+$^{*}p<0.05$, $^{**}p<0.01$, $^{***}p<0.001$. A dash indicates a variable omitted from the specification.
+The 1950--2017 column is the replication of the original model (4). The modern regression excludes 343 Williams observations because of perfect prediction. These records remain in experience histories and failure-rate calculations.
+\end{minipage}
+\end{table}

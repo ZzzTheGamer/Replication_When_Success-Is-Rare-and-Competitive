@@ -1,0 +1,17 @@
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{0.33\linewidth}@{}}
+\toprule
+Variable & Increment from the current race & Cumulative value before the race \\
+\midrule
+\vname{crace} & One for an actual start. Nonstarts do not count. & Number of prior starts. \\
+\vname{cw} & One for an own win, zero otherwise. & Number of prior own wins. \\
+\vname{ctw} & Winning shares of other drivers on the same team in the same race. The focal driver's win is excluded. & Sum of teammate winning shares from earlier races entered together. \\
+\vname{cfc} & One for an own car-failure event, including a technical disqualification. & Number of prior own car failures. \\
+\vname{cfd} & One for an own driver-failure event, including a sporting disqualification. & Number of prior own driver failures. \\
+\vname{ctfc} & Car-failure events of other drivers on the same team in the same race. & Sum of teammate car failures from earlier races entered together. \\
+\vname{ctfd} & Driver-failure events of other drivers on the same team in the same race. & Sum of teammate driver failures from earlier races entered together. \\
+\bottomrule
+\end{tabularx}
+\end{center}

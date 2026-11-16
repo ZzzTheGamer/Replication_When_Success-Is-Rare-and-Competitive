@@ -97,7 +97,13 @@ for(nm in names(models)) {
 write_csv(extension_display,"results/tables/table3_extension.csv")
 html_table(extension_display,"results/tables/table3_extension.html",
            "Table 3. Model (4), historical and extended samples",
-           note="Race-clustered standard errors in parentheses. Same controls and frozen legacy team definitions as Table 2. Samples: 21,487 historical rows; 24,928 full-sample rows; 3,098 modern estimation rows after 343 perfectly predicted Williams observations are excluded. The full modern data contain 3,441 starts in 173 races. All exposure histories include the Williams observations.")
+           note=sprintf("Race-clustered standard errors in parentheses. Same controls and frozen legacy team definitions as Table 2. Samples: %s historical rows; %s full-sample rows; %s modern estimation rows after %s perfectly predicted Williams observations are excluded. The full modern data contain %s starts in %s races. All exposure histories include the Williams observations.",
+             format(nrow(o$model), big.mark=",", trim=TRUE),
+             format(ef$full$metadata$n, big.mark=",", trim=TRUE),
+             format(ef$modern$metadata$n, big.mark=",", trim=TRUE),
+             format(ex$analysis[year>=2018, .N]-ef$modern$metadata$n, big.mark=",", trim=TRUE),
+             format(ex$analysis[year>=2018, .N], big.mark=",", trim=TRUE),
+             format(ex$analysis[year>=2018, uniqueN(racenr)], big.mark=",", trim=TRUE)))
 
 rates <- ex$analysis[, .(Driver_races=.N,Races=uniqueN(racenr),Car_DNF=sum(dnfc),
   Driver_DNF=sum(dnfd),Car_DNF_rate=mean(dnfc),Driver_DNF_rate=mean(dnfd)),by=period]
