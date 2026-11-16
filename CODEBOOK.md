@@ -11,6 +11,8 @@
 | Supplementary coding for the extension period | Race reports and `data/manual/` | Retirement reasons, pit-lane starts, weather, and track types; sources are retained in the coding files. |
 | Published benchmarks | `published_table1.csv`, `published_table2.csv` | Table 1 statistics and coefficients and standard errors for the specified Table 2 models. |
 
+The Canvas submission package includes all three author files in `data/raw/authors/`. At startup, `R/prepare_author_data.R` checks these inputs. For a GitHub checkout without the files, it can locate the original `mnsc.2022.4324.zip` archive beside the entry script, one folder above the project, or in Downloads and extract the required inputs automatically. Existing extracted inputs and the optional `F1_AUTHOR_DIR` setting are also supported.
+
 The original historical unit of observation is driver–car–race. Shared drives produce multiple records for some drivers in the same race. Original rows are uniquely identified by `racenr + driverid + car + finish`. Cumulative experience is constructed using all 21,616 rows before excluding the 129 rows with `ncs > 1`, leaving 21,487 estimation observations, 965 races, and 655 drivers. This order preserves the contribution of excluded observations to subsequent experience histories.
 
 The extension includes main races only. The 2018–2025 period contains 173 races. Excluding 18 nonstarter records from 3,458 API results leaves 3,440 starts. New races are ordered by year and round, with `racenr` continuing from 966 to 1,138. Driver identities are linked using standardized names and birth dates. Historical drivers retain their original `driverid`; new drivers receive new IDs. The process stops if a returning historical driver cannot be linked.

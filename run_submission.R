@@ -5,6 +5,10 @@ if (length(script_arg_submission))
   setwd(dirname(normalizePath(sub("^--file=", "", script_arg_submission[1]))))
 if (!file.exists("R/00_config.R"))
   stop("Open f1_replication.Rproj or setwd() to the project folder first.")
+source("setup.R", encoding = "UTF-8")
+source("R/prepare_author_data.R", encoding = "UTF-8")
+prepare_author_data()
+if (!nzchar(Sys.getenv("F1_OFFLINE"))) Sys.setenv(F1_OFFLINE = "1")
 source("R/00_config.R", encoding = "UTF-8")
 submission_steps <- c("01_rebuild_original.R", "02_download_jolpica.R",
   "03_download_wikipedia.R", "04_models.R", "05_link_and_validate_status.R",

@@ -4,34 +4,31 @@ This project uses R to independently reconstruct the cumulative experience varia
 
 ## Environment and data
 
-The analysis has been verified in R 4.4.3. Dependencies are installed by `setup.R`, and package versions are recorded in `results/sessionInfo.txt`. All data processing, estimation, tables, and figures are produced in R.
+The analysis has been verified in R 4.4.3. The entry script installs missing R packages through `setup.R`, and package versions are recorded in `results/sessionInfo.txt`. All data processing, estimation, tables, and figures are produced in R.
 
-Obtain the authors' original data from their replication materials and place the following three files in `data/raw/authors/`:
+The Canvas submission package includes the following three author files in `data/raw/authors/`. No data download or path configuration is needed:
 
 - `F1DataMainVariables.xlsx`: race-level event flags, race information, and driver information.
 - `F1StataData.dta`: used to validate the independently reconstructed variables.
 - `F1VariableDictionary.xlsx`: the authors' variable dictionary.
 
-If the original data are stored elsewhere, set the directory through the `F1_AUTHOR_DIR` environment variable. Cached API JSON files and race-report HTML files from public sources are included for offline replication.
+API JSON files and race-report HTML files from public sources are also cached in the package. For a GitHub checkout without the author files, the entry script can locate `mnsc.2022.4324.zip` beside `run_submission.R`, one folder above the project, or in Downloads and extract the three inputs automatically. Existing extracted files and the optional `F1_AUTHOR_DIR` setting are also supported.
 
 ## Full replication
 
 Open `f1_replication.Rproj` in RStudio and run:
 
 ```r
-source("setup.R")
-Sys.setenv(F1_OFFLINE = "1")
 source("run_submission.R")
 ```
 
 From the command line:
 
 ```sh
-Rscript setup.R
-F1_OFFLINE=1 Rscript run_submission.R
+Rscript run_submission.R
 ```
 
-`setup.R` requires an internet connection when dependencies are first installed. The full analysis can run offline using the cache. `run_submission.R` runs data reconstruction, historical validation, extension sample construction, model estimation, and result generation in order. After changing a manual coding table, rerun the same entry script to update subsequent cumulative experience and estimates affected by the change.
+The entry script checks the input files, installs missing dependencies, and runs data reconstruction, historical validation, extension sample construction, model estimation, and result generation in order. Internet access is needed only to install missing R packages. Public-source caches are used by default (`F1_OFFLINE=1` unless explicitly set otherwise). After changing a manual coding table, rerun the same entry script to update subsequent cumulative experience and estimates affected by the change.
 
 ## File structure
 
@@ -56,7 +53,8 @@ f1_replication/
 │   ├── check_coding.R
 │   ├── functions.R
 │   ├── model_helpers.R
-│   └── paper_style_helpers.R
+│   ├── paper_style_helpers.R
+│   └── prepare_author_data.R
 ├── data/
 │   ├── manual/
 │   ├── raw/
@@ -79,10 +77,11 @@ f1_replication/
     └── sessionInfo.txt
 ```
 
-`data/raw/authors/` contains files obtained from the original replication materials. `data/processed/` and `results/models/` are generated during execution.
+`data/raw/authors/` contains the original author inputs. `data/processed/` and `results/models/` are generated during execution.
 
 | Script | Function |
 |---|---|
+| `prepare_author_data.R` | Checks the bundled author inputs and locates an original archive or extracted files when preparation is needed. |
 | `00_config.R` | Checks dependencies and configures paths and cache options. |
 | `01_rebuild_original.R` | Reconstructs cumulative experience from the Excel event flags and checks each variable against the Stata data. |
 | `02_download_jolpica.R` | Reads or downloads schedules and race results. |
